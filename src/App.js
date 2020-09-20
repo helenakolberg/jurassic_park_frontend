@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Home from './Home.js';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    isLoading: true,
+    dinosaurs: []
+  }
+
+  async componentDidMount() {
+    const response = await fetch('/api/dinosaur');
+    const body = await response.json();
+    this.setState({ groups: body, isLoading: false });
+  }
+
+  render() {
+    return (
+      <CookiesProvider>
+        <Router>
+          <Switch>
+            <Route path='/' exact={true} component={Home}/>
+            {/* <Route path='/park' exact={true} component={Park}/> */}
+          </Switch>
+        </Router>
+      </CookiesProvider>
+    )
+  }
+
 }
 
 export default App;
