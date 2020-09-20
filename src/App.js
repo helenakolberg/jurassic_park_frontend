@@ -3,6 +3,7 @@ import './App.css';
 import Home from './Home.js';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
+import Park from './Park.js';
 
 class App extends Component {
 
@@ -23,7 +24,7 @@ class App extends Component {
         <Router>
           <Switch>
             <Route path='/' exact={true} component={Home}/>
-            {/* <Route path='/park' exact={true} component={Park}/> */}
+            <Route path='/park' exact={true} component={Park}/>
           </Switch>
         </Router>
       </CookiesProvider>
