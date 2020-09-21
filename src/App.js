@@ -15,7 +15,7 @@ class App extends Component {
   async componentDidMount() {
     const response = await fetch('/api/dinosaur');
     const body = await response.json();
-    this.setState({ groups: body, isLoading: false });
+    this.setState({ dinosaurs: body, isLoading: false });
   }
 
   render() {
