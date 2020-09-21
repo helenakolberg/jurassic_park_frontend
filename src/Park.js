@@ -25,7 +25,7 @@ class Park extends Component {
       async createNewDinosaur() {
         const newDinosaur = JSON.stringify({
           name: 'Tyrannosaurus Rex',
-          photo: 'https://www.pinclipart.com/picdir/big/409-4092141_jurassic-world-high-quality-transparent-background-dinosaur-png.png',
+          photo: 'https://i.ibb.co/89mddTZ/dino.png',
           happiness: true,
           fullness: true,
           health: true
@@ -60,35 +60,7 @@ class Park extends Component {
             if (dinosaurs.length === 0) {
               this.createNewDinosaur();
             }
-
-            // if (dinosaurs === []) {
-              // return fetch('api/dinosaur', {
-              //   method: 'POST',
-              //   body: {
-              //     name: 'Tyrannosaurus Rex',
-              //     photo: 'https://www.pinclipart.com/picdir/big/409-4092141_jurassic-world-high-quality-transparent-background-dinosaur-png.png',
-              //     happiness: true,
-              //     fullness: true,
-              //     health: true
-              //   },
-              //   headers: {
-              //     'X-XSRF-TOKEN': this.csrfToken,
-              //     'Accept': 'application/json',
-              //     'Content-Type': 'application/json'
-              //   },
-              //   credentials: 'include'
-              // })
-            //   .then(res => {
-            //     console.log('new fetch response', res)
-            //     res.json()
-            //   })
-            //   .then(fetch('api/dinosaur', {
-            //     credentials: 'include'
-            //   }))
-            //   .then(response => response.json())
-            //   .then(dinosaurs => this.setState({dinosaurs, isLoading: false}))
-            //   .catch(err => console.log(err));
-            // }            
+         
             return this.setState({dinosaurs, isLoading: false})
           })
           .catch(err => console.log(err));
