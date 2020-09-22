@@ -1,9 +1,10 @@
-import React, {Component } from 'react';
+import React, {Component, useState, useEffect, useRef } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import './Park.css';
+import Dinosaur from './Dinosaur';
 
 class Park extends Component {
 
@@ -64,17 +65,39 @@ class Park extends Component {
             return this.setState({dinosaurs, isLoading: false})
           })
           .catch(err => console.log(err));
+
+          this.changeToHungry();
+        
       }
 
+
+      changeToHungry() {
+        const hungryDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
+            ...dinosaur, 
+            fullness: false,
+            photo: 'https://i.ibb.co/LQzkDNZ/dino-hungry.png'
+            // change whatever else
+        }))
+        console.log(hungryDinosaurArray);
+        const interval = setInterval(() => {
+          this.setState({dinosaurs: hungryDinosaurArray})
+        }, 5000)
+      }
+
+      
+      
+      
+
       render() {
-        console.log('render dinosaur', this.state.dinosaurs);
-        const dinosaur = this.state.dinosaurs.map((dinosaur) => {
-            return <img src={dinosaur.photo} />
-        })
+        // const dinosaur = this.state.dinosaurs.map((dinosaur) => {
+        //     return <img src={dinosaur.photo} />
+        // })
+        const dinosaurs = this.state.dinosaurs;
+
 
           return (
             <>
-                <p>{dinosaur}</p>
+                <Dinosaur dinosaurs={dinosaurs}/>
             </>
           )
       }
