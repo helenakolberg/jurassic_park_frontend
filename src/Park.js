@@ -21,14 +21,16 @@ class Park extends Component {
                 csrfToken: cookies.get('XSRF-TOKEN'), 
                 isLoading: true,
                 murderTimerId: null,
-                isAlive: true
-            };
+                isAlive: true,
+                timer: null
+        };
         this.handleFeed = this.handleFeed.bind(this);
         this.changeToHungry = this.changeToHungry.bind(this);
         this.changeToSick = this.changeToSick.bind(this);
         this.timeOutFunction = this.timeOutFunction.bind(this);
         this.handleCure = this.handleCure.bind(this);
         this.startNewGame = this.startNewGame.bind(this);
+        this.saveGame = this.saveGame.bind(this);
       }
 
       murderDinosaur() {
@@ -59,6 +61,7 @@ class Park extends Component {
           }, 3000); 
           this.setState({murderTimerId: murderTimer});
         }, 3000);
+        this.setState({timer: timer});
       }
 
       async createNewDinosaur() {
@@ -184,6 +187,23 @@ class Park extends Component {
         this.fetchData();
       }
       
+      saveGame() {
+        const updatedDinosaur = this.state.dinosaurs[0];
+        console.log(updatedDinosaur);
+        fetch('/api/dinosaur/' + (updatedDinosaur.id), {
+          method: 'PUT',
+          headers: {
+            'X-XSRF-TOKEN': this.state.csrfToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updatedDinosaur),
+          credentials: 'include'
+        });
+        clearTimeout(this.state.murderTimerId);
+        clearTimeout(this.state.timer);
+        this.props.history.push('/');
+      }
 
       render() {
         // const dinosaur = this.state.dinosaurs.map((dinosaur) => {
@@ -198,7 +218,7 @@ class Park extends Component {
                 <Dinosaur dinosaurs={dinosaurs}/>
                 <Button disabled={!this.state.isAlive} onClick={this.handleFeed}>Feed me!</Button>
                 <Button disabled={!this.state.isAlive} onClick={this.handleCure}>Cure me!</Button>
-                <Button disabled={!this.state.isAlive}>Save and end the game</Button>
+                <Button disabled={!this.state.isAlive} onClick={this.saveGame}>Save and end the game</Button>
                 <Button onClick={this.startNewGame}>Start new game</Button>
             </>
           )
