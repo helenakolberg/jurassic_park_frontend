@@ -28,6 +28,7 @@ class Park extends Component {
         this.changeToSick = this.changeToSick.bind(this);
         this.timeOutFunction = this.timeOutFunction.bind(this);
         this.handleCure = this.handleCure.bind(this);
+        this.startNewGame = this.startNewGame.bind(this);
       }
 
       murderDinosaur() {
@@ -83,8 +84,7 @@ class Park extends Component {
         .then(dinosaur => this.setState({dinosaurs: [dinosaur], isLoading: false}))
       }
 
-      async componentDidMount() {
-        console.log('test', this.props.match.params.id);
+      async fetchData() {
         this.setState({isLoading: true});
 
         await fetch('api/dinosaur', {credentials: 'include'})
@@ -105,6 +105,11 @@ class Park extends Component {
 
           
           this.timeOutFunction();
+      }
+
+      async componentDidMount() {
+        this.fetchData();
+        
       }
 
       changeToSick() {
@@ -146,9 +151,9 @@ class Park extends Component {
             photo: 'https://i.ibb.co/89mddTZ/dino.png'
           }));
           this.setState({dinosaurs: fullDinosaurArray});
+          this.timeOutFunction();
+          clearTimeout(this.state.murderTimerId);
         }
-        this.timeOutFunction();
-        clearTimeout(this.state.murderTimerId);
       }
       
       handleCure() {
@@ -158,11 +163,25 @@ class Park extends Component {
             health: true,
             happiness: true,
             photo: 'https://i.ibb.co/89mddTZ/dino.png'
-          }));
+        }));
           this.setState({dinosaurs: healthyDinosaurArray});
+          this.timeOutFunction();
+          clearTimeout(this.state.murderTimerId);
         }
-        this.timeOutFunction();
-        clearTimeout(this.state.murderTimerId);
+      }
+      
+      startNewGame() {
+        fetch('/api/dinosaur', {
+          method: 'DELETE',
+          headers: {
+            'X-XSRF-TOKEN': this.state.csrfToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+        this.setState({dinosaurs: [], isAlive: true});
+        this.fetchData();
       }
       
 
@@ -180,7 +199,7 @@ class Park extends Component {
                 <Button disabled={!this.state.isAlive} onClick={this.handleFeed}>Feed me!</Button>
                 <Button disabled={!this.state.isAlive} onClick={this.handleCure}>Cure me!</Button>
                 <Button disabled={!this.state.isAlive}>Save and end the game</Button>
-                <Button>Start new game</Button>
+                <Button onClick={this.startNewGame}>Start new game</Button>
             </>
           )
       }
