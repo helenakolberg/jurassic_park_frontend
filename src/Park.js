@@ -20,12 +20,26 @@ class Park extends Component {
                 dinosaurs: [], 
                 csrfToken: cookies.get('XSRF-TOKEN'), 
                 isLoading: true,
-                murderTimerId: null
+                murderTimerId: null,
+                isAlive: true
             };
         this.handleFeed = this.handleFeed.bind(this);
         this.changeToHungry = this.changeToHungry.bind(this);
         this.changeToSick = this.changeToSick.bind(this);
         this.timeOutFunction = this.timeOutFunction.bind(this);
+        this.handleCure = this.handleCure.bind(this);
+      }
+
+      murderDinosaur() {
+        const murderedDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
+          ...dinosaur, 
+          fullness: false,
+          happiness: false,
+          health: false,
+          photo: 'https://i.ibb.co/Q9PgHRQ/dino-dead.png'
+      }))
+      this.setState({dinosaurs: murderedDinosaurArray});
+      this.setState({isAlive: false});
       }
 
       timeOutFunction() {
@@ -40,7 +54,7 @@ class Park extends Component {
 
           const murderTimer = setTimeout(() => {
             console.log("dead dinosaur")
-            // this.murderDinosaur();
+            this.murderDinosaur();
           }, 3000); 
           this.setState({murderTimerId: murderTimer});
         }, 3000);
@@ -109,7 +123,6 @@ class Park extends Component {
         }
 
       changeToHungry() {
-        console.log("call of change to hungry");
         const hungryDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
             ...dinosaur, 
             fullness: false,
@@ -138,7 +151,19 @@ class Park extends Component {
         clearTimeout(this.state.murderTimerId);
       }
       
-      
+      handleCure() {
+        if (!this.state.dinosaurs[0].health) {
+          const healthyDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
+            ...dinosaur, 
+            health: true,
+            happiness: true,
+            photo: 'https://i.ibb.co/89mddTZ/dino.png'
+          }));
+          this.setState({dinosaurs: healthyDinosaurArray});
+        }
+        this.timeOutFunction();
+        clearTimeout(this.state.murderTimerId);
+      }
       
 
       render() {
@@ -152,7 +177,10 @@ class Park extends Component {
           return (
             <>
                 <Dinosaur dinosaurs={dinosaurs}/>
-                <Button onClick={this.handleFeed}>Feed me!</Button>
+                <Button disabled={!this.state.isAlive} onClick={this.handleFeed}>Feed me!</Button>
+                <Button disabled={!this.state.isAlive} onClick={this.handleCure}>Cure me!</Button>
+                <Button disabled={!this.state.isAlive}>Save and end the game</Button>
+                <Button>Start new game</Button>
             </>
           )
       }

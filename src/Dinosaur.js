@@ -6,9 +6,6 @@ import { instanceOf } from 'prop-types';
 class Dinosaur extends Component {
     constructor () {
         super();
-        this.state = {
-            alive: true
-        }
     }
 
     render() {
