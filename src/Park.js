@@ -21,6 +21,7 @@ class Park extends Component {
                 csrfToken: cookies.get('XSRF-TOKEN'), 
                 isLoading: true
             };
+        this.handleFeed = this.handleFeed.bind(this);
       }
 
       async createNewDinosaur() {
@@ -72,19 +73,28 @@ class Park extends Component {
 
 
       changeToHungry() {
-        const hungryDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
-            ...dinosaur, 
-            fullness: false,
-            photo: 'https://i.ibb.co/LQzkDNZ/dino-hungry.png'
-            // change whatever else
-        }))
-        console.log(hungryDinosaurArray);
-        const interval = setInterval(() => {
-          this.setState({dinosaurs: hungryDinosaurArray})
-        }, 5000)
+        if (this.state.dinosaurs[0].happiness === true) {
+          const hungryDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
+              ...dinosaur, 
+              fullness: false,
+              happiness: false,
+              photo: 'https://i.ibb.co/LQzkDNZ/dino-hungry.png'
+          }))
+          const interval = setInterval(() => {
+              this.setState({dinosaurs: hungryDinosaurArray})
+          }, 5000)
+        }
       }
 
-      
+      handleFeed() {
+        const fullDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
+          ...dinosaur, 
+          fullness: true,
+          happiness: true,
+          photo: 'https://i.ibb.co/89mddTZ/dino.png'
+        }));
+        this.setState({dinosaurs: fullDinosaurArray});
+      }
       
       
 
@@ -98,6 +108,7 @@ class Park extends Component {
           return (
             <>
                 <Dinosaur dinosaurs={dinosaurs}/>
+                <Button onClick={this.handleFeed}>Feed me!</Button>
             </>
           )
       }
