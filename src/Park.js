@@ -19,9 +19,31 @@ class Park extends Component {
         this.state = {
                 dinosaurs: [], 
                 csrfToken: cookies.get('XSRF-TOKEN'), 
-                isLoading: true
+                isLoading: true,
+                murderTimerId: null
             };
         this.handleFeed = this.handleFeed.bind(this);
+        this.changeToHungry = this.changeToHungry.bind(this);
+        this.changeToSick = this.changeToSick.bind(this);
+        this.timeOutFunction = this.timeOutFunction.bind(this);
+      }
+
+      timeOutFunction() {
+        const randomState = Math.floor(Math.random() * 2) + 1;
+        const timer = setTimeout(() => {
+          if (randomState === 1) {
+            this.changeToHungry();
+          } 
+          if (randomState === 2) {
+            this.changeToSick();
+          }
+
+          const murderTimer = setTimeout(() => {
+            console.log("dead dinosaur")
+            // this.murderDinosaur();
+          }, 3000); 
+          this.setState({murderTimerId: murderTimer});
+        }, 3000);
       }
 
       async createNewDinosaur() {
@@ -67,34 +89,55 @@ class Park extends Component {
           })
           .catch(err => console.log(err));
 
-          this.changeToHungry();
-        
+          
+          this.timeOutFunction();
       }
 
+      changeToSick() {
+        console.log("call of change to sick");
+          const sickDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
+              ...dinosaur, 
+              health: false,
+              happiness: false,
+              photo: 'https://i.ibb.co/bHkhGPV/dino-sick.png'
+          }))
+          this.setState({dinosaurs: sickDinosaurArray});
+          // const interval = setInterval(() => {
+          //     this.setState({dinosaurs: hungryDinosaurArray})
+          // }, 10000)
+          console.log(this.state.dinosaurs);
+        }
 
       changeToHungry() {
-        if (this.state.dinosaurs[0].happiness === true) {
-          const hungryDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
-              ...dinosaur, 
-              fullness: false,
-              happiness: false,
-              photo: 'https://i.ibb.co/LQzkDNZ/dino-hungry.png'
-          }))
-          const interval = setInterval(() => {
-              this.setState({dinosaurs: hungryDinosaurArray})
-          }, 5000)
-        }
+        console.log("call of change to hungry");
+        const hungryDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
+            ...dinosaur, 
+            fullness: false,
+            happiness: false,
+            photo: 'https://i.ibb.co/LQzkDNZ/dino-hungry.png'
+        }))
+        this.setState({dinosaurs: hungryDinosaurArray});
+        
+        // const interval = setInterval(() => {
+        //     this.setState({dinosaurs: hungryDinosaurArray})
+        // }, 5000)
+        // console.log("change to hungry:", this.state.dinosaurs)
       }
 
       handleFeed() {
-        const fullDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
-          ...dinosaur, 
-          fullness: true,
-          happiness: true,
-          photo: 'https://i.ibb.co/89mddTZ/dino.png'
-        }));
-        this.setState({dinosaurs: fullDinosaurArray});
+        if (!this.state.dinosaurs[0].fullness) {
+          const fullDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
+            ...dinosaur, 
+            fullness: true,
+            happiness: true,
+            photo: 'https://i.ibb.co/89mddTZ/dino.png'
+          }));
+          this.setState({dinosaurs: fullDinosaurArray});
+        }
+        this.timeOutFunction();
+        clearTimeout(this.state.murderTimerId);
       }
+      
       
       
 
@@ -104,6 +147,7 @@ class Park extends Component {
         // })
         const dinosaurs = this.state.dinosaurs;
 
+        
 
           return (
             <>
