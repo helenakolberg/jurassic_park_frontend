@@ -7,8 +7,8 @@ import './Park.css';
 import Dinosaur from './Dinosaur';
 import food from './food.png';
 import thermometer from './thermometer.png';
-import crunch from './crunch.mp3';
-import sigh from './heal.mp3';
+import crunch from './audio/crunch.mp3';
+import sigh from './audio/heal.mp3';
 
 class Park extends Component {
 

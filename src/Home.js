@@ -6,7 +6,7 @@ import { Button, Container } from 'reactstrap';
 import { withCookies } from 'react-cookie';
 import './Home.css';
 import logo from './tyrannogochi_logo.png';
-import soundfile from './song.mp3';
+import soundfile from './audio/song.mp3';
 
 class Home extends Component {
 
