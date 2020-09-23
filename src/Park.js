@@ -56,7 +56,6 @@ class Park extends Component {
           }
 
           const murderTimer = setTimeout(() => {
-            console.log("dead dinosaur")
             this.murderDinosaur();
           }, 3000); 
           this.setState({murderTimerId: murderTimer});
@@ -133,7 +132,9 @@ class Park extends Component {
               happiness: false,
               photo: 'https://i.ibb.co/bHkhGPV/dino-sick.png'
           }))
-          this.setState({dinosaurs: sickDinosaurArray});
+          this.setState(prevState => {
+            return {dinosaurs: sickDinosaurArray}
+          });
           // const interval = setInterval(() => {
           //     this.setState({dinosaurs: hungryDinosaurArray})
           // }, 10000)
@@ -147,7 +148,9 @@ class Park extends Component {
             happiness: false,
             photo: 'https://i.ibb.co/LQzkDNZ/dino-hungry.png'
         }))
-        this.setState({dinosaurs: hungryDinosaurArray});
+        this.setState(prevState => {
+          return {dinosaurs: hungryDinosaurArray}
+        });
         
         // const interval = setInterval(() => {
         //     this.setState({dinosaurs: hungryDinosaurArray})
@@ -190,9 +193,12 @@ class Park extends Component {
             'Content-Type': 'application/json'
           },
           credentials: 'include'
-        });
-        this.setState({dinosaurs: [], isAlive: true});
-        this.fetchData();
+        })
+        .then(() => {
+          this.setState({dinosaurs: [], isAlive: true}, this.fetchData);
+        })
+        clearTimeout(this.state.murderTimerId);
+        clearTimeout(this.state.timer);
       }
       
       saveGame() {
@@ -208,10 +214,10 @@ class Park extends Component {
           body: JSON.stringify(updatedDinosaur),
           credentials: 'include'
         });
-        clearTimeout(this.state.murderTimerId);
-        console.log(this.state.murderTimerId, "murder timer id");
-        clearTimeout(this.state.timer);
-        console.log("timer id:", this.state.timer);
+        // clearTimeout(this.state.murderTimerId);
+        // console.log(this.state.murderTimerId, "murder timer id");
+        // clearTimeout(this.state.timer);
+        // console.log("timer id:", this.state.timer);
         this.props.history.push('/');
       }
 
