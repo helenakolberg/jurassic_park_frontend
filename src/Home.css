@@ -1,4 +1,6 @@
 .welcome-headline {
     font-family: 'jurassic_park' , Arial, sans-serif; 
     font-size: 80px;
+    letter-spacing: 3px;
+    text-align: center;
 }

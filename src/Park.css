@@ -37,6 +37,7 @@ body {
 }
 
 #thermometer {
-    width: 10px;
-    height: 28px;
+    width: 9px;
+    height: 27px;
+    transform: rotate(20deg);
 }
