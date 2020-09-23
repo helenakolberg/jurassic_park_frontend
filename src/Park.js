@@ -209,8 +209,18 @@ class Park extends Component {
       render() {
         const dinosaurs = this.state.dinosaurs;
 
+        const unhappyWarning = this.state.dinosaurs.map((dinosaur) => {
+          if (!dinosaur.happiness && this.state.isAlive) {
+            return <h4>Oh no, your dinosaur is unhappy! You should try to help him...</h4>
+          }
+        })
+
           return (
             <>
+                {unhappyWarning}
+                { !this.state.isAlive ? (
+                  <h4>Your dinosaur is dead. RIP.</h4> ) : ( null
+                )}
                 <Dinosaur dinosaurs={dinosaurs}/>
                 <Button disabled={!this.state.isAlive} onClick={this.handleFeed}>Feed me!</Button>
                 <Button disabled={!this.state.isAlive} onClick={this.handleCure}>Cure me!</Button>
