@@ -61,7 +61,7 @@ class Park extends Component {
             this.murderDinosaur();
           }, 3000); 
           this.setState({murderTimerId: murderTimer});
-        }, 3000);
+        }, 5000);
         this.setState({timer: timer});
       }
 

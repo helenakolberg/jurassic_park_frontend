@@ -1,3 +1,6 @@
 .dinosaur-image {
-  -webkit-transform: scale(0.85);
+  height: 500px;
+  width: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
