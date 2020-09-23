@@ -6,6 +6,7 @@ import { withCookies } from 'react-cookie';
 import './Home.css';
 import logo from './tyrannogochi_logo.png';
 import soundfile from './audio/song.mp3';
+import clickSound from './audio/click.mp3';
 
 class Home extends Component {
 
@@ -22,6 +23,7 @@ class Home extends Component {
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
         this.myRef = React.createRef();
+        this.clickSoundEffect = this.clickSoundEffect.bind(this);
     }
 
     async componentDidMount() {
@@ -35,6 +37,7 @@ class Home extends Component {
       }
 
     login() {
+        this.clickSoundEffect();
         let port = (window.location.port ? ':' + window.location.port : '');
         if (port === ':3000') {
             port = ':8080';
@@ -43,6 +46,7 @@ class Home extends Component {
     }
 
     logout() {
+        this.clickSoundEffect();
         fetch('/api/logout', {method: 'POST', credentials: 'include',
         headers: {'X-XSRF-TOKEN': this.state.csrfToken}}).then(res => res.json())
             .then(response => {
@@ -50,6 +54,11 @@ class Home extends Component {
             response.idToken + "&post_logout_redirect_uri=" + window.location.origin;
         });
     }
+
+    clickSoundEffect() {
+        const click = new Audio(clickSound);
+        click.play();
+      }
     
     render() {
         const audio = <audio src={soundfile} ref={this.myRef} loop autoPlay/>;
@@ -58,7 +67,7 @@ class Home extends Component {
             <p className="welcome-headline">please log in to tyrannogotchi</p>;
         const button = this.state.isAuthenticated ?
             <div className="button-wrapper">
-            <Button className="game-button"><Link className="route" to="/park">your park</Link></Button>
+            <Link className="route" to="/park"><Button className="game-button" onclick={this.clickSoundEffect}>your park</Button></Link>
             <br/>
             <Button className="game-button" onClick={this.logout}>logout</Button>
             </div> :
