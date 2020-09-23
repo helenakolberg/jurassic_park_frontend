@@ -1,9 +1,9 @@
 img {
     display: block;
     margin: 0 auto;
-    margin-top: 50px;
 }
 
 .dinosaur-container {
     text-align: center;
+    padding-top: 80px;
 }
