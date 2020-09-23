@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Sound from 'react-sound';
 import './App.css';
 import { Link } from 'react-router-dom';
 import { Button, Container } from 'reactstrap';

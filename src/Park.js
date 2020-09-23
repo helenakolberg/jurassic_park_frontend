@@ -9,6 +9,7 @@ import food from './food.png';
 import thermometer from './thermometer.png';
 import crunch from './audio/crunch.mp3';
 import sigh from './audio/heal.mp3';
+import gameOver from './audio/game_over.mp3';
 
 class Park extends Component {
 
@@ -37,9 +38,11 @@ class Park extends Component {
         this.saveGame = this.saveGame.bind(this);
         this.crunch = this.crunch.bind(this);
         this.healingBeep = this.healingBeep.bind(this);
+        this.gameOverSound = this.gameOverSound.bind(this);
       }
 
       murderDinosaur() {
+        this.gameOverSound();
         const murderedDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
           ...dinosaur, 
           fullness: false,
@@ -162,6 +165,11 @@ class Park extends Component {
       healingBeep() {
         const beep = new Audio(sigh);
         beep.play();
+      }
+      
+      gameOverSound() {
+        const gameOverBeep = new Audio(gameOver);
+        gameOverBeep.play();
       }
 
       handleFeed() {
