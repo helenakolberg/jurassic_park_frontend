@@ -211,7 +211,7 @@ class Park extends Component {
 
         const unhappyWarning = this.state.dinosaurs.map((dinosaur, index) => {
           if (!dinosaur.happiness && this.state.isAlive) {
-            return <h4 key={index}> Oh no, your dinosaur is unhappy! You should try to help him...</h4>
+            return <p className="status-message" key={index}> Oh no, your dinosaur is unhappy! You should try to help him...</p>
           }
         })
 
@@ -219,13 +219,13 @@ class Park extends Component {
             <>
                 {unhappyWarning}
                 { !this.state.isAlive ? (
-                  <h4>Your dinosaur is dead. RIP.</h4> ) : ( null
+                  <p className="status-message">Your dinosaur is dead. RIP.</p> ) : ( null
                 )}
                 <Dinosaur dinosaurs={dinosaurs}/>
-                <Button disabled={!this.state.isAlive} onClick={this.handleFeed}>Feed me!</Button>
-                <Button disabled={!this.state.isAlive} onClick={this.handleCure}>Cure me!</Button>
-                <Button disabled={!this.state.isAlive} onClick={this.saveGame}>Save and end the game</Button>
-                <Button onClick={this.startNewGame}>Start new game</Button>
+                <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleFeed}>Feed me!</Button>
+                <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleCure}>Cure me!</Button>
+                <Button className="game-button" disabled={!this.state.isAlive} onClick={this.saveGame}>Save and end the game</Button>
+                <Button className="game-button" onClick={this.startNewGame}>Start new game</Button>
             </>
           )
       }
