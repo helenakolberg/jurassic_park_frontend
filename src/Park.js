@@ -41,7 +41,7 @@ class Park extends Component {
           fullness: false,
           happiness: false,
           health: false,
-          photo: 'https://i.ibb.co/Q9PgHRQ/dino-dead.png'
+          photo: 'https://i.ibb.co/6gCgBWJ/rip.png'
       }))
       this.setState({dinosaurs: murderedDinosaurArray});
       this.setState({isAlive: false});
@@ -68,7 +68,7 @@ class Park extends Component {
       async createNewDinosaur() {
         const newDinosaur = JSON.stringify({
           name: 'Tyrannosaurus Rex',
-          photo: 'https://i.ibb.co/89mddTZ/dino.png',
+          photo: 'https://i.ibb.co/9wmRhFx/alive.png',
           happiness: true,
           fullness: true,
           health: true
@@ -131,7 +131,7 @@ class Park extends Component {
               ...dinosaur, 
               health: false,
               happiness: false,
-              photo: 'https://i.ibb.co/bHkhGPV/dino-sick.png'
+              photo: 'https://i.ibb.co/NxCNWTN/sick.png'
           }))
           this.setState(prevState => {
             return {dinosaurs: sickDinosaurArray}
@@ -143,7 +143,7 @@ class Park extends Component {
             ...dinosaur, 
             fullness: false,
             happiness: false,
-            photo: 'https://i.ibb.co/LQzkDNZ/dino-hungry.png'
+            photo: 'https://i.ibb.co/9qsgQ7c/hungry.png'
         }))
         this.setState(prevState => {
           return {dinosaurs: hungryDinosaurArray}
@@ -156,7 +156,7 @@ class Park extends Component {
             ...dinosaur, 
             fullness: true,
             happiness: true,
-            photo: 'https://i.ibb.co/89mddTZ/dino.png'
+            photo: 'https://i.ibb.co/9wmRhFx/alive.png'
           }));
           this.setState({dinosaurs: fullDinosaurArray}, this.timeOutFunction);
           clearTimeout(this.state.murderTimerId);
@@ -169,7 +169,7 @@ class Park extends Component {
             ...dinosaur, 
             health: true,
             happiness: true,
-            photo: 'https://i.ibb.co/89mddTZ/dino.png'
+            photo: 'https://i.ibb.co/9wmRhFx/alive.png'
         }));
           this.setState({dinosaurs: healthyDinosaurArray}, this.timeOutFunction);
           clearTimeout(this.state.murderTimerId);
@@ -211,15 +211,18 @@ class Park extends Component {
       render() {
         const dinosaurs = this.state.dinosaurs;
 
-        const unhappyWarning = this.state.dinosaurs.map((dinosaur, index) => {
+        const statusMessage = this.state.dinosaurs.map((dinosaur, index) => {
           if (!dinosaur.happiness && this.state.isAlive) {
             return <p className="status-message" key={index}> oh no, your dinosaur is unhappy. you should try to help him...</p>
+          }
+          else if (dinosaur.happiness && this.state.isAlive) {
+            return <p className="status-message" key={index}>your dinosaur is happy.</p>
           }
         })
 
           return (
             <div id="wrapper">
-                {unhappyWarning}
+                {statusMessage}
                 { !this.state.isAlive ? (
                   <p className="status-message">your dinosaur is dead. rip.</p> ) : ( null )}
                 <Dinosaur dinosaurs={dinosaurs}/>

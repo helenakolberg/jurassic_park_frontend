@@ -15,9 +15,9 @@ class Dinosaur extends Component {
         })
 
         return (
-            <div className="dinosaur-container">
+            <>
              {dinosaur}
-            </div>
+            </>
         )
     }
 
