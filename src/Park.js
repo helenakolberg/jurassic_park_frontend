@@ -222,10 +222,12 @@ class Park extends Component {
                   <p className="status-message">your dinosaur is dead. rip.</p> ) : ( null
                 )}
                 <Dinosaur dinosaurs={dinosaurs}/>
-                <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleFeed}>Feed me!</Button>
-                <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleCure}>Cure me!</Button>
-                <Button className="game-button" disabled={!this.state.isAlive} onClick={this.saveGame}>Save and end the game</Button>
-                <Button className="game-button" onClick={this.startNewGame}>Start new game</Button>
+                <div id="button-wrapper">
+                  <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleFeed}>feed me</Button>
+                  <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleCure}>cure me</Button>
+                  <Button className="game-button" disabled={!this.state.isAlive} onClick={this.saveGame}>save and end the game</Button>
+                  <Button className="game-button" onClick={this.startNewGame}>start new game</Button>
+                </div>
             </>
           )
       }
