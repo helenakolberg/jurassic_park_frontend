@@ -125,7 +125,6 @@ class Park extends Component {
       }
 
       changeToSick() {
-        console.log("call of change to sick");
           const sickDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
               ...dinosaur, 
               health: false,
@@ -135,10 +134,6 @@ class Park extends Component {
           this.setState(prevState => {
             return {dinosaurs: sickDinosaurArray}
           });
-          // const interval = setInterval(() => {
-          //     this.setState({dinosaurs: hungryDinosaurArray})
-          // }, 10000)
-          console.log(this.state.dinosaurs);
         }
 
       changeToHungry() {
@@ -151,11 +146,6 @@ class Park extends Component {
         this.setState(prevState => {
           return {dinosaurs: hungryDinosaurArray}
         });
-        
-        // const interval = setInterval(() => {
-        //     this.setState({dinosaurs: hungryDinosaurArray})
-        // }, 5000)
-        // console.log("change to hungry:", this.state.dinosaurs)
       }
 
       handleFeed() {
@@ -203,7 +193,6 @@ class Park extends Component {
       
       saveGame() {
         const updatedDinosaur = this.state.dinosaurs[0];
-        console.log(updatedDinosaur);
         fetch('/api/dinosaur/' + (updatedDinosaur.id), {
           method: 'PUT',
           headers: {
@@ -214,20 +203,11 @@ class Park extends Component {
           body: JSON.stringify(updatedDinosaur),
           credentials: 'include'
         });
-        // clearTimeout(this.state.murderTimerId);
-        // console.log(this.state.murderTimerId, "murder timer id");
-        // clearTimeout(this.state.timer);
-        // console.log("timer id:", this.state.timer);
         this.props.history.push('/');
       }
 
       render() {
-        // const dinosaur = this.state.dinosaurs.map((dinosaur) => {
-        //     return <img src={dinosaur.photo} />
-        // })
         const dinosaurs = this.state.dinosaurs;
-
-        
 
           return (
             <>
