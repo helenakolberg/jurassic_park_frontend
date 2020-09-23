@@ -5,6 +5,7 @@ body {
 #wrapper {
    display: grid;
    grid-template-rows: auto auto auto auto;
+   justify-items: center;
 }
 
 .status-message {
@@ -40,6 +41,7 @@ body {
 .game-button:disabled {
     background-color: white;
     color: lightgray;
+    cursor: default;
 }
 
 #food {

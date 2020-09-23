@@ -221,8 +221,7 @@ class Park extends Component {
             <div id="wrapper">
                 {unhappyWarning}
                 { !this.state.isAlive ? (
-                  <p className="status-message">your dinosaur is dead. rip.</p> ) : ( null
-                )}
+                  <p className="status-message">your dinosaur is dead. rip.</p> ) : ( null )}
                 <Dinosaur dinosaurs={dinosaurs}/>
                 <div id="button-wrapper">
                   <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleFeed}>feed me <img id="food" src={food}/></Button>
