@@ -3,6 +3,7 @@ import './App.css';
 import { Link } from 'react-router-dom';
 import { Button, Container } from 'reactstrap';
 import { withCookies } from 'react-cookie';
+import './Home.css';
 
 class Home extends Component {
 
@@ -50,7 +51,7 @@ class Home extends Component {
     
     render() {
         const message = this.state.user ?
-            <h2>Welcome, {this.state.user.name}!</h2> :
+            <h2 className="welcome-headline">Welcome, {this.state.user.name}!</h2> :
             <p>Please log in to Jurassic Park.</p>;
         const button = this.state.isAuthenticated ?
             <div>
