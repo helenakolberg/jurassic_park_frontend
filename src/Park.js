@@ -115,6 +115,16 @@ class Park extends Component {
         
       }
 
+      componentWillUnmount() {
+        if (this.state.timer) {
+          clearTimeout(this.state.timer);
+          this.setState({timer: null});
+        } if (this.state.murderTimerId) {
+          clearTimeout(this.state.murderTimerId)
+          this.setState({murderTimerId: null})
+        }
+      }
+
       changeToSick() {
         console.log("call of change to sick");
           const sickDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
@@ -153,8 +163,7 @@ class Park extends Component {
             happiness: true,
             photo: 'https://i.ibb.co/89mddTZ/dino.png'
           }));
-          this.setState({dinosaurs: fullDinosaurArray});
-          this.timeOutFunction();
+          this.setState({dinosaurs: fullDinosaurArray}, this.timeOutFunction);
           clearTimeout(this.state.murderTimerId);
         }
       }
@@ -167,8 +176,7 @@ class Park extends Component {
             happiness: true,
             photo: 'https://i.ibb.co/89mddTZ/dino.png'
         }));
-          this.setState({dinosaurs: healthyDinosaurArray});
-          this.timeOutFunction();
+          this.setState({dinosaurs: healthyDinosaurArray}, this.timeOutFunction);
           clearTimeout(this.state.murderTimerId);
         }
       }
@@ -201,7 +209,9 @@ class Park extends Component {
           credentials: 'include'
         });
         clearTimeout(this.state.murderTimerId);
+        console.log(this.state.murderTimerId, "murder timer id");
         clearTimeout(this.state.timer);
+        console.log("timer id:", this.state.timer);
         this.props.history.push('/');
       }
 
