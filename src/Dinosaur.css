@@ -1,4 +1,9 @@
-#dinosaur-image {
+img {
     display: block;
-    margin-left: 200px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.dinosaur-container {
+    text-align: center;
 }
