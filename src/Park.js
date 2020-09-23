@@ -218,7 +218,7 @@ class Park extends Component {
         })
 
           return (
-            <>
+            <div id="wrapper">
                 {unhappyWarning}
                 { !this.state.isAlive ? (
                   <p className="status-message">your dinosaur is dead. rip.</p> ) : ( null
@@ -230,7 +230,7 @@ class Park extends Component {
                   <Button className="game-button" disabled={!this.state.isAlive} onClick={this.saveGame}>save and end the game</Button>
                   <Button className="game-button" onClick={this.startNewGame}>start new game</Button>
                 </div>
-            </>
+            </div>
           )
       }
 
