@@ -7,6 +7,7 @@ import './Park.css';
 import Dinosaur from './Dinosaur';
 import food from './food.png';
 import thermometer from './thermometer.png';
+import crunch from './crunch.mp3';
 
 class Park extends Component {
 
@@ -33,6 +34,7 @@ class Park extends Component {
         this.handleCure = this.handleCure.bind(this);
         this.startNewGame = this.startNewGame.bind(this);
         this.saveGame = this.saveGame.bind(this);
+        this.crunch = this.crunch.bind(this);
       }
 
       murderDinosaur() {
@@ -150,8 +152,14 @@ class Park extends Component {
         });
       }
 
+      crunch() {
+        const crunchSound = new Audio(crunch);
+        crunchSound.play();
+      }
+
       handleFeed() {
         if (!this.state.dinosaurs[0].fullness) {
+          this.crunch();
           const fullDinosaurArray = this.state.dinosaurs.map(dinosaur => ({
             ...dinosaur, 
             fullness: true,
