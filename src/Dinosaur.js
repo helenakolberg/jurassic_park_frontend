@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { withCookies, Cookies } from 'react-cookie';
 import { instanceOf } from 'prop-types';
+import './Dinosaur.css';
 
 
 class Dinosaur extends Component {
@@ -14,9 +15,9 @@ class Dinosaur extends Component {
         })
 
         return (
-            <>
+            <div className="dinosaur-container">
              {dinosaur}
-            </>
+            </div>
         )
     }
 

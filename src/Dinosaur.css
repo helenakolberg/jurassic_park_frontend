@@ -1,4 +1,8 @@
-#dinosaur-image {
-    display: block;
-    margin-left: 200px;
+img {
+  position: fixed;
+  top: 50px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
 }
