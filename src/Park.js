@@ -226,7 +226,7 @@ class Park extends Component {
                 { !this.state.isAlive ? (
                   <p className="status-message">your dinosaur is dead. rip.</p> ) : ( null )}
                 <Dinosaur dinosaurs={dinosaurs}/>
-                <div id="button-wrapper">
+                <div className="button-wrapper">
                   <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleFeed}>feed me <img id="food" src={food}/></Button>
                   <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleCure}>cure me <img id="thermometer" src={thermometer}/></Button>
                   <Button className="game-button" disabled={!this.state.isAlive} onClick={this.saveGame}>save and end the game</Button>

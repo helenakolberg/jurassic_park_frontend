@@ -54,12 +54,12 @@ class Home extends Component {
             <p className="welcome-headline">Welcome, {this.state.user.name}</p> :
             <p>Please log in to Jurassic Park.</p>;
         const button = this.state.isAuthenticated ?
-            <div>
-            <Button><Link to="/park">Your park</Link></Button>
+            <div className="button-wrapper">
+            <Button className="game-button"><Link className="route" to="/park">Your park</Link></Button>
             <br/>
-            <Button onClick={this.logout}>Logout</Button>
+            <Button className="game-button" onClick={this.logout}>Logout</Button>
             </div> :
-            <Button onClick={this.login}>Login</Button>;
+            <Button className="game-button" onClick={this.login}>Login</Button>;
         return (
             <div>
             <Container fluid>

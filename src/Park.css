@@ -16,7 +16,7 @@ body {
     word-spacing: 6px;
 }
 
-#button-wrapper {
+.button-wrapper {
     display: flex;
     justify-content: center;
 }
