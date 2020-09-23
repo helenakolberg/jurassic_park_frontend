@@ -209,9 +209,9 @@ class Park extends Component {
       render() {
         const dinosaurs = this.state.dinosaurs;
 
-        const unhappyWarning = this.state.dinosaurs.map((dinosaur) => {
+        const unhappyWarning = this.state.dinosaurs.map((dinosaur, index) => {
           if (!dinosaur.happiness && this.state.isAlive) {
-            return <h4>Oh no, your dinosaur is unhappy! You should try to help him...</h4>
+            return <h4 key={index}> Oh no, your dinosaur is unhappy! You should try to help him...</h4>
           }
         })
 

@@ -14,9 +14,9 @@ class Dinosaur extends Component {
         })
 
         return (
-            <>
+            <div>
              {dinosaur}
-            </>
+            </div>
         )
     }
 
