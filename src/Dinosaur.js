@@ -10,13 +10,13 @@ class Dinosaur extends Component {
 
     render() {
         const dinosaur = this.props.dinosaurs.map((dinosaur, index) => {
-             return <img key={index} src={dinosaur.photo} />
+             return <img className="dinosaur-image" key={index} src={dinosaur.photo} />
         })
 
         return (
-            <div>
+            <>
              {dinosaur}
-            </div>
+            </>
         )
     }
 
