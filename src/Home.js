@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button, Container } from 'reactstrap';
 import { withCookies } from 'react-cookie';
 import './Home.css';
+import logo from './tyrannogochi_logo2.png';
 
 class Home extends Component {
 
@@ -51,22 +52,21 @@ class Home extends Component {
     
     render() {
         const message = this.state.user ?
-            <p className="welcome-headline">Welcome, {this.state.user.name}</p> :
-            <p>Please log in to Jurassic Park.</p>;
+            <p className="welcome-headline">welcome, {this.state.user.name}</p> :
+            <p className="welcome-headline">please log in to tyrannogotchi</p>;
         const button = this.state.isAuthenticated ?
             <div className="button-wrapper">
-            <Button className="game-button"><Link className="route" to="/park">Your park</Link></Button>
+            <Button className="game-button"><Link className="route" to="/park">your park</Link></Button>
             <br/>
-            <Button className="game-button" onClick={this.logout}>Logout</Button>
+            <Button className="game-button" onClick={this.logout}>logout</Button>
             </div> :
-            <Button className="game-button" onClick={this.login}>Login</Button>;
+            <Button className="game-button" onClick={this.login}>login</Button>;
         return (
-            <div>
-            <Container fluid>
+            <Container id="home-container">
                 {message}
+                <img id="tyranno-logo" src={logo} />
                 {button}
             </Container>
-            </div>
         );
     }
 }

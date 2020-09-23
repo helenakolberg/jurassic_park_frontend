@@ -1,8 +1,16 @@
+#home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
 .welcome-headline {
     font-family: 'jurassic_park' , Arial, sans-serif; 
     font-size: 80px;
     letter-spacing: 3px;
     text-align: center;
+    margin-bottom: 0px;
+    margin-top: 20px;
 }
 
 .button-wrapper {
@@ -42,4 +50,11 @@
 
 .route:hover {
     color: white;
+}
+
+#tyranno-logo {
+    -webkit-transform: scale(0.6);
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px
 }
