@@ -10,6 +10,7 @@ import thermometer from './thermometer.png';
 import crunch from './audio/crunch.mp3';
 import sigh from './audio/heal.mp3';
 import gameOver from './audio/game_over.mp3';
+import clickSound from './audio/click.mp3';
 
 class Park extends Component {
 
@@ -39,6 +40,7 @@ class Park extends Component {
         this.crunch = this.crunch.bind(this);
         this.healingBeep = this.healingBeep.bind(this);
         this.gameOverSound = this.gameOverSound.bind(this);
+        this.clickSoundEffect = this.clickSoundEffect.bind(this);
       }
 
       murderDinosaur() {
@@ -172,6 +174,11 @@ class Park extends Component {
         gameOverBeep.play();
       }
 
+      clickSoundEffect() {
+        const click = new Audio(clickSound);
+        click.play();
+      }
+
       handleFeed() {
         if (!this.state.dinosaurs[0].fullness) {
           this.crunch();
@@ -201,6 +208,7 @@ class Park extends Component {
       }
       
       startNewGame() {
+        this.clickSoundEffect();
         fetch('/api/dinosaur', {
           method: 'DELETE',
           headers: {
@@ -218,6 +226,7 @@ class Park extends Component {
       }
       
       saveGame() {
+        this.clickSoundEffect();
         const updatedDinosaur = this.state.dinosaurs[0];
         fetch('/api/dinosaur/' + (updatedDinosaur.id), {
           method: 'PUT',
