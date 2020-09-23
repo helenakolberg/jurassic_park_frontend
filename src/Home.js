@@ -51,10 +51,9 @@ class Home extends Component {
             response.idToken + "&post_logout_redirect_uri=" + window.location.origin;
         });
     }
-
     
     render() {
-        const audio = <audio ref={this.myRef} src={soundfile} autoPlay/>;
+        const audio = <audio src={soundfile} ref={this.myRef} loop autoPlay/>;
         const message = this.state.user ?
             <p className="welcome-headline">welcome, {this.state.user.name}</p> :
             <p className="welcome-headline">please log in to tyrannogotchi</p>;
@@ -68,12 +67,12 @@ class Home extends Component {
                 <Button id="login-button" className="game-button" onClick={this.login}>login</Button>
             </div>;
         return (
-            <Container id="home-container">
-                {audio}
-                {message}
-                <img id="tyranno-logo" src={logo} />
-                {button}
-                {audio}
+            <Container id="home-container" >
+                    {audio}
+                    {message}
+                    <img id="tyranno-logo" src={logo} />
+                    {button}
+                    {audio}
             </Container>
         );
     }
