@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import Sound from 'react-sound';
 import './App.css';
 import { Link } from 'react-router-dom';
 import { Button, Container } from 'reactstrap';
 import { withCookies } from 'react-cookie';
 import './Home.css';
+import logo from './tyrannogochi_logo2.png';
+import soundfile from './song.mp3';
 
 class Home extends Component {
 
@@ -19,6 +22,7 @@ class Home extends Component {
         this.state.csrfToken = cookies.get('XSRF-TOKEN');
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
+        this.myRef = React.createRef();
     }
 
     async componentDidMount() {
@@ -50,23 +54,27 @@ class Home extends Component {
 
     
     render() {
+        const audio = <audio ref={this.myRef} src={soundfile} autoPlay/>;
         const message = this.state.user ?
-            <h2 className="welcome-headline">Welcome, {this.state.user.name}!</h2> :
-            <p>Please log in to Jurassic Park.</p>;
+            <p className="welcome-headline">welcome, {this.state.user.name}</p> :
+            <p className="welcome-headline">please log in to tyrannogotchi</p>;
         const button = this.state.isAuthenticated ?
-            <div>
-            <Button><Link to="/park">Your park</Link></Button>
+            <div className="button-wrapper">
+            <Button className="game-button"><Link className="route" to="/park">your park</Link></Button>
             <br/>
-            <Button onClick={this.logout}>Logout</Button>
+            <Button className="game-button" onClick={this.logout}>logout</Button>
             </div> :
-            <Button onClick={this.login}>Login</Button>;
+            <div className="button-wrapper">
+                <Button id="login-button" className="game-button" onClick={this.login}>login</Button>
+            </div>;
         return (
-            <div>
-            <Container fluid>
+            <Container id="home-container">
+                {audio}
                 {message}
+                <img id="tyranno-logo" src={logo} />
                 {button}
+                {audio}
             </Container>
-            </div>
         );
     }
 }

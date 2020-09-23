@@ -5,6 +5,8 @@ import { withCookies, Cookies } from 'react-cookie';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import './Park.css';
 import Dinosaur from './Dinosaur';
+import food from './food.png';
+import thermometer from './thermometer.png';
 
 class Park extends Component {
 
@@ -39,7 +41,7 @@ class Park extends Component {
           fullness: false,
           happiness: false,
           health: false,
-          photo: 'https://i.ibb.co/Q9PgHRQ/dino-dead.png'
+          photo: 'https://i.ibb.co/6gCgBWJ/rip.png'
       }))
       this.setState({dinosaurs: murderedDinosaurArray});
       this.setState({isAlive: false});
@@ -59,14 +61,14 @@ class Park extends Component {
             this.murderDinosaur();
           }, 3000); 
           this.setState({murderTimerId: murderTimer});
-        }, 3000);
+        }, 5000);
         this.setState({timer: timer});
       }
 
       async createNewDinosaur() {
         const newDinosaur = JSON.stringify({
           name: 'Tyrannosaurus Rex',
-          photo: 'https://i.ibb.co/89mddTZ/dino.png',
+          photo: 'https://i.ibb.co/9wmRhFx/alive.png',
           happiness: true,
           fullness: true,
           health: true
@@ -129,7 +131,7 @@ class Park extends Component {
               ...dinosaur, 
               health: false,
               happiness: false,
-              photo: 'https://i.ibb.co/bHkhGPV/dino-sick.png'
+              photo: 'https://i.ibb.co/NxCNWTN/sick.png'
           }))
           this.setState(prevState => {
             return {dinosaurs: sickDinosaurArray}
@@ -141,7 +143,7 @@ class Park extends Component {
             ...dinosaur, 
             fullness: false,
             happiness: false,
-            photo: 'https://i.ibb.co/LQzkDNZ/dino-hungry.png'
+            photo: 'https://i.ibb.co/9qsgQ7c/hungry.png'
         }))
         this.setState(prevState => {
           return {dinosaurs: hungryDinosaurArray}
@@ -154,7 +156,7 @@ class Park extends Component {
             ...dinosaur, 
             fullness: true,
             happiness: true,
-            photo: 'https://i.ibb.co/89mddTZ/dino.png'
+            photo: 'https://i.ibb.co/9wmRhFx/alive.png'
           }));
           this.setState({dinosaurs: fullDinosaurArray}, this.timeOutFunction);
           clearTimeout(this.state.murderTimerId);
@@ -167,7 +169,7 @@ class Park extends Component {
             ...dinosaur, 
             health: true,
             happiness: true,
-            photo: 'https://i.ibb.co/89mddTZ/dino.png'
+            photo: 'https://i.ibb.co/9wmRhFx/alive.png'
         }));
           this.setState({dinosaurs: healthyDinosaurArray}, this.timeOutFunction);
           clearTimeout(this.state.murderTimerId);
@@ -209,14 +211,28 @@ class Park extends Component {
       render() {
         const dinosaurs = this.state.dinosaurs;
 
+        const statusMessage = this.state.dinosaurs.map((dinosaur, index) => {
+          if (!dinosaur.happiness && this.state.isAlive) {
+            return <p className="status-message" key={index}> oh no, your dinosaur is unhappy. you should try to help him...</p>
+          }
+          else if (dinosaur.happiness && this.state.isAlive) {
+            return <p className="status-message" key={index}>your dinosaur is happy.</p>
+          }
+        })
+
           return (
-            <>
+            <div id="wrapper">
+                {statusMessage}
+                { !this.state.isAlive ? (
+                  <p className="status-message">your dinosaur is dead. rip.</p> ) : ( null )}
                 <Dinosaur dinosaurs={dinosaurs}/>
-                <Button disabled={!this.state.isAlive} onClick={this.handleFeed}>Feed me!</Button>
-                <Button disabled={!this.state.isAlive} onClick={this.handleCure}>Cure me!</Button>
-                <Button disabled={!this.state.isAlive} onClick={this.saveGame}>Save and end the game</Button>
-                <Button onClick={this.startNewGame}>Start new game</Button>
-            </>
+                <div className="button-wrapper">
+                  <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleFeed}>feed me <img id="food" src={food}/></Button>
+                  <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleCure}>cure me <img id="thermometer" src={thermometer}/></Button>
+                  <Button className="game-button" disabled={!this.state.isAlive} onClick={this.saveGame}>save and end the game</Button>
+                  <Button className="game-button" onClick={this.startNewGame}>start new game</Button>
+                </div>
+            </div>
           )
       }
 
