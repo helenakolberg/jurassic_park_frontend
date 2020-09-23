@@ -51,7 +51,7 @@ class Home extends Component {
     
     render() {
         const message = this.state.user ?
-            <p className="welcome-headline">Welcome, {this.state.user.name}!</p> :
+            <p className="welcome-headline">Welcome, {this.state.user.name}</p> :
             <p>Please log in to Jurassic Park.</p>;
         const button = this.state.isAuthenticated ?
             <div>
