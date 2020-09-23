@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import Sound from 'react-sound';
 import './App.css';
 import { Link } from 'react-router-dom';
 import { Button, Container } from 'reactstrap';
 import { withCookies } from 'react-cookie';
 import './Home.css';
 import logo from './tyrannogochi_logo2.png';
+import soundfile from './song.mp3';
 
 class Home extends Component {
 
@@ -20,6 +22,7 @@ class Home extends Component {
         this.state.csrfToken = cookies.get('XSRF-TOKEN');
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
+        this.myRef = React.createRef();
     }
 
     async componentDidMount() {
@@ -51,6 +54,7 @@ class Home extends Component {
 
     
     render() {
+        const audio = <audio ref={this.myRef} src={soundfile} autoPlay/>;
         const message = this.state.user ?
             <p className="welcome-headline">welcome, {this.state.user.name}</p> :
             <p className="welcome-headline">please log in to tyrannogotchi</p>;
@@ -65,9 +69,11 @@ class Home extends Component {
             </div>;
         return (
             <Container id="home-container">
+                {audio}
                 {message}
                 <img id="tyranno-logo" src={logo} />
                 {button}
+                {audio}
             </Container>
         );
     }
