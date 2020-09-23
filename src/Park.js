@@ -5,6 +5,8 @@ import { withCookies, Cookies } from 'react-cookie';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import './Park.css';
 import Dinosaur from './Dinosaur';
+import food from './food.png';
+import thermometer from './thermometer.png';
 
 class Park extends Component {
 
@@ -223,8 +225,8 @@ class Park extends Component {
                 )}
                 <Dinosaur dinosaurs={dinosaurs}/>
                 <div id="button-wrapper">
-                  <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleFeed}>feed me</Button>
-                  <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleCure}>cure me</Button>
+                  <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleFeed}>feed me <img id="food" src={food}/></Button>
+                  <Button className="game-button" disabled={!this.state.isAlive} onClick={this.handleCure}>cure me <img id="thermometer" src={thermometer}/></Button>
                   <Button className="game-button" disabled={!this.state.isAlive} onClick={this.saveGame}>save and end the game</Button>
                   <Button className="game-button" onClick={this.startNewGame}>start new game</Button>
                 </div>
