@@ -60,7 +60,9 @@ class Home extends Component {
             <br/>
             <Button className="game-button" onClick={this.logout}>logout</Button>
             </div> :
-            <Button className="game-button" onClick={this.login}>login</Button>;
+            <div className="button-wrapper">
+                <Button id="login-button" className="game-button" onClick={this.login}>login</Button>
+            </div>;
         return (
             <Container id="home-container">
                 {message}
