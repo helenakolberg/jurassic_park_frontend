@@ -1,6 +1,6 @@
 # Tyrannogotchi
 
-The backend of a Tamagotchi-inspired application where the user can create an account and take care of a virtual T-Rex.
+The frontend of a Tamagotchi-inspired application where the user can create an account and take care of a virtual T-Rex.
 
 See the backend code <a href="https://github.com/helenakolberg/tyrannogotchi_backend">here</a>
 
